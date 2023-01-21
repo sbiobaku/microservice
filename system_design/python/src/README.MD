@@ -1,4 +1,3 @@
-https://www.youtube.com/watch?v=hmkF77F9TLw
 Install the following
     Docker
     minikube
