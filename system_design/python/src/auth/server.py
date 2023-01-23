@@ -46,16 +46,17 @@ def createJWT(username, secret, authz):
         secret,
         algorithm="HS256"
     )
-@server.route('/validate', method=["POST"])
+@server.route('/validate', methods=["POST"])
 def validate():
     encoded_jwt = request.headers["Authorization"]
 
     if not encoded_jwt:
         return "missing credentials", 401
     encoded_jwt = encoded_jwt.split(" ")[1]
+    secret = os.environ.get("JWT_SECRET")
     try:
         decode = jwt.decode(
-            encoded_jwt, os.environ.get("JWT_SECRET"), algorithm=["HS256"]
+            encoded_jwt, secret, algorithms=["HS256"]
         ) 
     except:
         return "not authorized", 403

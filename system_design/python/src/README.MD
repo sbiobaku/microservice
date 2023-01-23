@@ -30,7 +30,7 @@ With the rabbitMQ pod running log in with guest/guest
 
 Testing:
 curl -X POST http://mp3converter.com/login -u email@yahoo.com:password
-curl -X POST -F 'file=0_seconds_movies.3gp' -H 'Authorization: Bearer <token> ' http://mp3converter.com/upload
+curl -X POST -F 'file=@./10_seconds_movies.3gp' -H 'Authorization: Bearer <token>' http://mp3converter.com/upload
 
 This returns a token
 
