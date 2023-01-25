@@ -17,10 +17,10 @@ def upload(f, fs, channel, access):
             exchange = "",
             routing_key="video",
             body=json.dumps(message),
-            properties=pika.BasicProperites(
+            properties=pika.BasicProperties(
                 delivery_mode=pika.spec.PERSISTENT_DELIVERY_MODE
             ),
         )
-    except:
+    except Exception as err:
         fs.delete(fid)
         return "internal server error2", 500

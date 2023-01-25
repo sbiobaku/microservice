@@ -12,7 +12,7 @@ def start(message, fs_videos, fs_mp3s, channel):
     #add video contents to empty file
     tf.write(out.read())
     # create audio from temp video file
-    audio = moviepy.editor.VideopFileClip(tf.name).audio
+    audio = moviepy.editor.VideoFileClip(tf.name).audio
     tf.close()
 
     #write audio to the file
@@ -26,12 +26,12 @@ def start(message, fs_videos, fs_mp3s, channel):
     f.close()
     os.remove(tf_path)
 
-    message["mpr_fid"] = str(fid)
+    message["mp3_fid"] = str(fid)
 
     try:
         channel.basic_publish(
             exchange="",
-            routing_key=os.environ.get("MP3+QUEUE"),
+            routing_key=os.environ.get("MP3_QUEUE"),
             body=json.dumps(message),
             properties=pika.BasicProperties(delivery_mode=pika.spec.PERSISTENT_DELIVERY_MODE),
         )
